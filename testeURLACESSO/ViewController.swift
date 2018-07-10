@@ -7,17 +7,31 @@
 //
 
 import UIKit
+import SafariServices
 
-class ViewController: UIViewController {
 
+class ViewController: UIViewController, SFSafariViewControllerDelegate {
+
+    private let urlStringAssignature:String = "https://goo.gl/CnWc9p"
+    private let urlStringPhoto:String = "https://goo.gl/AGiHxc"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+    }
+    @IBAction func openURL(_ sender: UIButton) {
+        let svc = SFSafariViewController(url: NSURL(string: self.urlStringAssignature)! as URL)
+        svc.delegate = self
+        self.present(svc, animated: true, completion: nil)
+    }
+    
+    private func safariViewControllerDidFinish(controller: SFSafariViewController)
+    {
+        controller.dismiss(animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 
